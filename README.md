@@ -50,9 +50,9 @@ Step-by-step to develop a simple and clean backend (**Django**) and frontend (**
 `$ cd FOLDER_PATH/frontend`
 2. Install React and Redux with Typescript.
 <br>
-`$ yarn create react-app your-project-name --template typescript-redux`
+`$ yarn create react-app your-project-name --template typescript`
 3. Add some extra packages.
-`$ yarn add react-redux redux-thunk redux-persist axios formik yup`
+`$ yarn add react-router-dom @types/react-router-dom react-redux @types/react-redux redux-thunk @types/redux-thunk redux-persist redux-devtools-extension axios formik yup`
 4. Remove standard files.
 `$ rm -rf README.md README_CRA.md src/components/* src/features src/pages/* src/index.css src/setupTests.ts src/store.ts`
 5. Edit App.tsx, index.tsx, and index.html.
