@@ -10,92 +10,82 @@ Step-by-step to develop a simple and clean backend (**Django**) and frontend (**
 1. Create a Git repository. That can be done on the GitHub page or on your local machine. Since it's a simple step, I would rather do it on GitHub.
 
 2. Create a local empty folder.
-
-<br>
-
-`$ mkdir FOLDER_PATH`
+```bash
+$ mkdir FOLDER_PATH
+```
 
 3. Change working directory to the folder created.
-
-<br>
-
-`$ cd FOLDER_PATH`
+```bash
+$ cd FOLDER_PATH
+```
 
 4. Clone the Git repository into an empty folder.
-
-<br>
-
-`$ git clone GIT_REPOSITORY_NAME .`
+```bash
+$ git clone GIT_REPOSITORY_NAME .
+```
 
 5. Create backend and frontend folders.
-
-<br>
-
-`$ mkdir backend frontend`
+```bash
+$ mkdir backend frontend
+```
 
 
 ### Install Django - Backend
 
 1. Change working directory to the backend folder.
-
-<br>
-
-`$ cd FOLDER_PATH/backend`
+```bash
+$ cd FOLDER_PATH/backend
+```
 
 2. Install Django and some dependencies.
-
-<br>
-
-`$ pipenv install django djangorestframework django-cors-headers`
+```bash
+$ pipenv install django djangorestframework django-cors-headers
+```
 
 3. Open virtual environment.
-
-<br>
-
-`$ pipenv shell`
+```bash
+$ pipenv shell
+```
 
 4. Register requirements.
-
-<br>
-
-`$ pip freeze > requirements.txt`
+```bash
+$ pip freeze > requirements.txt
+```
 
 5. Start a project.
-
-<br>
-
-`$ django-admin startproject PROJECT_NAME .`
+```bash
+$ django-admin startproject PROJECT_NAME .
+```
 
 6. Migrate the changes.
-
-<br>
-
-`$ python manage.py migrate`
+```bash
+$ python manage.py migrate
+```
 
 
 ### Install React and Redux (TypeScript) - Frontend
 
 1. Change working directory to the frontend folder.
-
-<br>
-
-`$ cd FOLDER_PATH/frontend`
+```bash
+$ cd FOLDER_PATH/frontend
+```
 
 2. Install React and Redux with Typescript.
-
-<br>
-
-`$ yarn create react-app your-project-name --template typescript`
+```bash
+$ yarn create react-app your-project-name --template typescript
+```
 
 3. Add some extra packages.
-
-`$ yarn add react-router-dom @types/react-router-dom react-redux @types/react-redux redux-thunk @types/redux-thunk redux-persist redux-devtools-extension axios formik yup`
+```bash
+$ yarn add react-router-dom @types/react-router-dom react-redux @types/react-redux redux-thunk @types/redux-thunk redux-persist redux-devtools-extension axios formik yup
+```
 
 4. Remove standard files.
+```bash
+$ rm -rf README.md README_CRA.md src/components/* src/features src/pages/* src/index.css src/setupTests.ts src/store.ts
+```
 
-`$ rm -rf README.md README_CRA.md src/components/* src/features src/pages/* src/index.css src/setupTests.ts src/store.ts`
-
-5. Edit App.tsx, index.tsx, and index.html.
+5. Clean App.tsx, index.tsx, and index.html.
 
 
 ### Configurate Django API - Backend
@@ -103,7 +93,6 @@ Step-by-step to develop a simple and clean backend (**Django**) and frontend (**
 1. Open the configuration file. The configuration file is located at `FOLDER_PATH/BACKEND/PROJECT_NAME/settings.py`.
 
 2. Define allowed hosts.
-
 ```python
 ALLOWED_HOSTS = [
     'localhost',
@@ -112,7 +101,6 @@ ALLOWED_HOSTS = [
 ```
 
 3. Add CORS Headers and Django REST Framework to the installed apps list.
-
 ```python
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -127,7 +115,6 @@ INSTALLED_APPS = [
 ```
 
 4. Add CORS Headers middleware to the middleware list. Attention to the position of the `corsheaders.middleware.CorsMiddleware` in the list, it makes a difference.
-
 ```python
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,8 +128,6 @@ MIDDLEWARE = [
 ]
 ```
 
-5. Define CORS Headers white list.
-
 ```python
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
@@ -150,7 +135,6 @@ CORS_ORIGIN_WHITELIST = [
 ```
 
 6. Define default permissions for Django REST Framework initially allowing users to access to all the HTTP methods.
-
 ```python
 DJANGO_RESTFRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -160,7 +144,6 @@ DJANGO_RESTFRAMEWORK = {
 ```
 
 7. Move secret key to a new a file, add the file to *.gitignore*, and import the secret key to Django settings.
-
 ```python
 from SECRET_FILE import SECRET_KEY
 ```
@@ -169,7 +152,10 @@ from SECRET_FILE import SECRET_KEY
 ### Create an app and a model - Backend
 
 1. Start an app.
+```bash
+$ python manage.py startapp APP_NAME
+```
+2. Create the models in *FOLDER_PATH/APP_NAME/models.py*.
+3. Create views in *FOLDER_PATH/APP_NAME/views.py*.
+4. Create a REST Framework serializer in *FOLDER_PATH/APP_NAME/serializers.py*.
 
-<br>
-
-`$ python manage.py startapp APP_NAME`

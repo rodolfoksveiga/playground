@@ -11,7 +11,6 @@ ALLOWED_HOSTS = [
     '127.0.0.1'
 ]
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,7 +19,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
+    'users',
+    'posts',
+    'comments'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'playground.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -76,6 +77,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
     }
 ]
+
+AUTH_USER_MODEL = 'users.User'
 
 LANGUAGE_CODE = 'en-us'
 
@@ -100,3 +103,4 @@ DJANGO_RESTFRAMEWORK = {
         'rest_framework.permissions.AllowAny'
     ]
 }
+
