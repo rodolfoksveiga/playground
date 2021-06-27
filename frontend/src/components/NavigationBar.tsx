@@ -1,11 +1,10 @@
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
+import { Navbar, Nav } from 'react-bootstrap'
 
 export default function NavigationBar() {
     return (
-        <Navbar className="d-flex flex-md-column flex-lg-row">
-            <Navbar.Brand>Rodolfo Kirch Veiga</Navbar.Brand>
-            <Nav>
+        <Navbar className="d-flex flex-column flex-md-row justify-content-between">
+            <Navbar.Brand className="ml-2">Rodolfo Kirch Veiga</Navbar.Brand>
+            <Nav className="mr-2">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/resume/">Resume</Nav.Link>
                 <Nav.Link href="/projects/">Projects</Nav.Link>

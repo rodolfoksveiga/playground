@@ -1,17 +1,22 @@
 // Import components, functions, types, variables, and styles
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
 
 import Home from './pages/Home'
 import NavigationBar from './components/NavigationBar'
+import PostsList from './pages/blog/PostsList'
 
 // Component
 export default function App() {
     return (
         <BrowserRouter>
-            <NavigationBar />
-            <Switch>
-                <Route path="/" component={Home} exact />
-            </Switch>
+            <Container fluid className="pt-1 pt-md-2 pt-lg-3">
+                <NavigationBar />
+                <Switch>
+                    <Route path="/" component={Home} exact />
+                    <Route path="/blog/" component={PostsList} exact />
+                </Switch>
+            </Container>
         </BrowserRouter>
     )
 }
