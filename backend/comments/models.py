@@ -4,7 +4,6 @@ from django.db.models import (
     Model,
     DateTimeField,
     CharField,
-    TextField,
     ForeignKey,
     BooleanField
 )
@@ -17,8 +16,9 @@ class Comment(Model):
         _('Modified at'),
         auto_now=True
     )
-    comment = TextField(
-        _('Comment')
+    body = CharField(
+        _('Comment body'),
+        max_length=600
     )
     post = ForeignKey(
         Post,
@@ -36,5 +36,5 @@ class Comment(Model):
     )
 
     def __str__(self):
-        return 'Comment {} by {}'.format(self.comment, self.user.username)
+        return 'Comment {} by {}'.format(self.body, self.user.username)
 

@@ -18,10 +18,10 @@ class Post(Model):
         max_length=200
     )
     body = TextField(
-        _('Body (markdown file)')
+        _('Post body')
     )
     image = ImageField(
-        _('Image file'),
+        _('Image path'),
         upload_to='posts'
     )
     legend = CharField(
