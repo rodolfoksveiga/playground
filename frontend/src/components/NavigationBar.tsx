@@ -2,7 +2,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 
 export default function NavigationBar() {
     return (
-        <Navbar className="d-flex flex-column flex-md-row justify-content-between">
+        <Navbar className="shadow-lg mb-2 mb-md-3 d-flex flex-column flex-md-row justify-content-between">
             <Navbar.Brand className="ml-2">Rodolfo Kirch Veiga</Navbar.Brand>
             <Nav className="mr-2">
                 <Nav.Link href="/">Home</Nav.Link>

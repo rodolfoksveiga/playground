@@ -14,6 +14,7 @@ export interface IPost {
     created_at: string
     title: string
     body: string
+    image: string
     deleted: boolean
 }
 
@@ -43,7 +44,7 @@ export function PostsList({
     return (
         <Container
             fluid="md"
-            className="d-flex flex-wrap justify-content-center"
+            className="d-flex flex-wrap justify-content-center align-items-center"
         >
             {message ? (
                 <h3>{message}</h3>
@@ -53,6 +54,7 @@ export function PostsList({
                     return (
                         <PostCard
                             title={post.title}
+                            image={post.image}
                             date={post.created_at}
                             id={post.id}
                         />

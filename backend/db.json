@@ -1,0 +1,75 @@
+[
+{
+    "model": "users.user",
+    "fields": {
+        "password": "pbkdf2_sha256$260000$hRbdVrebbTECXpKNqMkNI5$INxwx6tt4zcpfPFnHfcpgVwN2tzHDsf7jN9KiJDJh4Q=",
+        "last_login": "2021-06-28T10:21:42.126Z",
+        "is_superuser": true,
+        "created_at": "2021-06-28T10:21:10.443Z",
+        "username": "rodox",
+        "email": "rodox@gmail.com",
+        "first_name": null,
+        "last_name": null,
+        "about": null,
+        "is_active": true,
+        "is_staff": true,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+        "created_at": "2021-06-28T10:22:55.293Z",
+        "title": "Post1",
+        "body": "Body.",
+        "image": "posts/post1.jpeg",
+        "deleted": false
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 2,
+    "fields": {
+        "created_at": "2021-06-28T10:23:09.864Z",
+        "title": "Post2",
+        "body": "Body Body.",
+        "image": "posts/post2.jpeg",
+        "deleted": false
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 3,
+    "fields": {
+        "created_at": "2021-06-28T10:23:22.964Z",
+        "title": "Post3",
+        "body": "Body Body Body.",
+        "image": "posts/post3.jpeg",
+        "deleted": false
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 4,
+    "fields": {
+        "created_at": "2021-06-28T10:23:35.827Z",
+        "title": "Post4",
+        "body": "Body Body Body Body.",
+        "image": "posts/post4.jpeg",
+        "deleted": false
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 5,
+    "fields": {
+        "created_at": "2021-06-28T10:23:54.628Z",
+        "title": "Post5",
+        "body": "Body Body Body Body Body.",
+        "image": "posts/post5.jpeg",
+        "deleted": false
+    }
+}
+]

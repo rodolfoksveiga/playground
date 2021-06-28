@@ -9,6 +9,7 @@ class PostSerializer(serializers.ModelSerializer):
             'id',
             'created_at',
             'title',
-            'body'
+            'body',
+            'image'
         ]
 

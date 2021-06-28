@@ -4,7 +4,8 @@ from django.db.models import (
     DateTimeField,
     CharField,
     TextField,
-    BooleanField
+    BooleanField,
+    ImageField
 )
 
 class Post(Model):
@@ -17,6 +18,7 @@ class Post(Model):
         max_length=200
     )
     body = TextField()
+    image = ImageField(upload_to='posts')
     deleted = BooleanField(
         default=False
     )
