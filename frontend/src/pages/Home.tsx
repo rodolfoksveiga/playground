@@ -1,3 +1,16 @@
+import { Col, Container, Row } from 'react-bootstrap'
+
 export default function Home() {
-    return <h1 className="text-light text-center display-1">Home</h1>
+    return (
+        <Container className="h-75">
+            <Row style={{ height: '40vw' }}>
+                <Col xs={7} className="border">
+                    Text
+                </Col>
+                <Col xs={5} className="border">
+                    Text
+                </Col>
+            </Row>
+        </Container>
+    )
 }

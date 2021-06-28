@@ -17,7 +17,12 @@ export default function PostCard({
 }: IPostCardProps) {
     return (
         <Card className="m-2 m-md-3 shadow" style={{ width: '18rem' }}>
-            <Card.Img className="p-1 pb-0" variant="top" src={image} />
+            <Card.Img
+                className="p-1 pb-0"
+                variant="top"
+                src={image}
+                alt={legend}
+            />
             <Card.Body className="text-center">
                 <Card.Title className="font-weight-bold">{title}</Card.Title>
                 <Card.Text>{date}</Card.Text>
