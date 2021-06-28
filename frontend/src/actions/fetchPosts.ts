@@ -6,10 +6,15 @@ import { TPosts } from '../pages/blog/PostsList'
 
 // Action types
 const URL = 'http://localhost:8000/api/posts/'
+export const FETCH_POSTS_LOADING = 'FETCH_POSTS_LOADING'
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS'
 export const FETCH_POSTS_FAIL = 'FETCH_POSTS_FAIL'
 
 // Types and interfaces
+interface IFetchPostsLoading {
+    type: typeof FETCH_POSTS_LOADING
+}
+
 interface IFetchPostsSuccess {
     type: typeof FETCH_POSTS_SUCCESS
     payload: TPosts
@@ -20,12 +25,16 @@ interface IFetchPostsFail {
     payload: string
 }
 
-export type TDispatchFetchPosts = IFetchPostsSuccess | IFetchPostsFail
+export type TDispatchFetchPosts = IFetchPostsLoading | IFetchPostsSuccess | IFetchPostsFail
 
 // Action
 export default function fetchPosts() {
     return async (dispatch: Dispatch<TDispatchFetchPosts>) => {
         try {
+            dispatch({
+                type: FETCH_POSTS_LOADING
+            })
+
             const response = await axios.get(URL)
 
             dispatch({

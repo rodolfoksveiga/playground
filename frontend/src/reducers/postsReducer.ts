@@ -1,5 +1,6 @@
 // Import components, functions, types, variables, and styles
 import {
+    FETCH_POSTS_LOADING,
     FETCH_POSTS_SUCCESS,
     FETCH_POSTS_FAIL,
     TDispatchFetchPosts,
@@ -8,12 +9,14 @@ import { TPosts } from '../pages/blog/PostsList'
 
 // Types and interfaces
 interface IFetchPostsState {
-    data: TPosts | null
-    message: string | null
+    isLoading: boolean
+    data: null | TPosts
+    message: null | string
 }
 
 // Global variables
 const initialState = {
+    isLoading: false,
     data: null,
     message: null,
 }
@@ -21,18 +24,23 @@ const initialState = {
 // Reducer
 export function postsReducer(
     state: IFetchPostsState = initialState,
-    action: any
+    action: TDispatchFetchPosts
 ) {
     switch (action.type) {
-        case FETCH_POSTS_SUCCESS:
+        case FETCH_POSTS_LOADING:
             return {
                 ...state,
+                isLoading: true
+            }
+        case FETCH_POSTS_SUCCESS:
+            return {
+                isLoading: false,
                 data: action.payload,
                 message: null,
             }
         case FETCH_POSTS_FAIL:
             return {
-                ...state,
+                isLoading: false,
                 data: null,
                 message: action.payload,
             }

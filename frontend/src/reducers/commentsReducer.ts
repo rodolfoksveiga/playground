@@ -1,5 +1,6 @@
 // Import components, functions, types, variables, and styles
 import {
+    FETCH_COMMENTS_LOADING,
     FETCH_COMMENTS_SUCCESS,
     FETCH_COMMENTS_FAIL,
     TDispatchFetchComments,
@@ -8,12 +9,14 @@ import { TComments } from '../pages/blog/PostDetails'
 
 // Types and interfaces
 interface IFetchCommentsState {
-    data: TComments | null
-    message: string | null
+    isLoading: boolean
+    data: null | TComments
+    message: null | string
 }
 
 // Global variables
 const initialState = {
+    isLoading: false,
     data: null,
     message: null,
 }
@@ -21,18 +24,23 @@ const initialState = {
 // Reducer
 export function commentsReducer(
     state: IFetchCommentsState = initialState,
-    action: any
+    action: TDispatchFetchComments
 ) {
     switch (action.type) {
-        case FETCH_COMMENTS_SUCCESS:
+        case FETCH_COMMENTS_LOADING:
             return {
                 ...state,
+                isLoading: true
+            }
+        case FETCH_COMMENTS_SUCCESS:
+            return {
+                isLoading: false,
                 data: action.payload,
                 message: null,
             }
         case FETCH_COMMENTS_FAIL:
             return {
-                ...state,
+                isLoading: false,
                 data: null,
                 message: action.payload,
             }
