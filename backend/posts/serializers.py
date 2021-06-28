@@ -10,6 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
             'created_at',
             'title',
             'body',
-            'image'
+            'image',
+            'legend'
         ]
 

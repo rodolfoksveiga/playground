@@ -17,9 +17,19 @@ class Post(Model):
         _('Title'),
         max_length=200
     )
-    body = TextField()
-    image = ImageField(upload_to='posts')
+    body = TextField(
+        _('Body (markdown file)')
+    )
+    image = ImageField(
+        _('Image file'),
+        upload_to='posts'
+    )
+    legend = CharField(
+        _('Legend'),
+        max_length=200
+    )
     deleted = BooleanField(
+        _('Deleted'),
         default=False
     )
 

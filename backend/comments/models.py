@@ -17,13 +17,16 @@ class Comment(Model):
         _('Modified at'),
         auto_now=True
     )
-    body = TextField()
+    comment = TextField(
+        _('Comment')
+    )
     post = ForeignKey(
         Post,
         on_delete=CASCADE,
         related_name='comments'
     )
     deleted = BooleanField(
+        _('Deleted'),
         default=False
     )
     user = ForeignKey(
@@ -33,5 +36,5 @@ class Comment(Model):
     )
 
     def __str__(self):
-        return 'Comment {} by {}'.format(self.body, self.user.username)
+        return 'Comment {} by {}'.format(self.comment, self.user.username)
 

@@ -1,6 +1,8 @@
 // Import components, functions, types, variables, and styles
+import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import parse from 'html-react-parser'
 
 import { TRootState } from '../../reducers/rootReducer'
 import { TPosts } from './PostsList'
@@ -13,6 +15,7 @@ export interface ICommentParams {
 interface IComment {
     id: number
     modified_at: string
+    comment: string
     post: number
     deleted: boolean
     user: number
@@ -28,10 +31,34 @@ interface IPostDetailsProps {
 
 // Component
 export function PostDetails({ posts, comments, message }: IPostDetailsProps) {
-    const history = useHistory()
     const { id } = useParams<ICommentParams>()
 
-    return <div></div>
+    let post = null
+    if (posts) {
+        post = posts.find((item) => String(item.id) === id)
+    }
+
+    return (
+        <Container>
+            {message ? (
+                <h3>{message}</h3>
+            ) : (
+                post && (
+                    <Container className="d-flex flex-column justify-content-center">
+                        <img
+                            className="my-3 shadow"
+                            src={post.image}
+                            alt={post.legend}
+                        />
+                        <h2 className="display-2 text-center my-3">
+                            {post.title}
+                        </h2>
+                        <div>{parse(post.body)}</div>
+                    </Container>
+                )
+            )}
+        </Container>
+    )
 }
 
 // Connect to Redux

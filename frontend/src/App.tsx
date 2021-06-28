@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Home from './pages/Home'
 import NavigationBar from './components/NavigationBar'
 import PostsList from './pages/blog/PostsList'
+import PostDetails from './pages/blog/PostDetails'
 
 // Component
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
                 <Switch>
                     <Route path="/" component={Home} exact />
                     <Route path="/blog/" component={PostsList} exact />
+                    <Route path="/blog/:id/" exact component={PostDetails} />
                 </Switch>
             </Container>
         </BrowserRouter>

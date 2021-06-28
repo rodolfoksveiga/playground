@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 
 import fetchPosts from '../../actions/fetchPosts'
 import fetchComments from '../../actions/fetchComments'
@@ -15,6 +14,7 @@ export interface IPost {
     title: string
     body: string
     image: string
+    legend: string
     deleted: boolean
 }
 
@@ -34,32 +34,31 @@ export function PostsList({
     fetchPosts,
     fetchComments
 }: IPostsListProps) {
-    const history = useHistory()
-
     useEffect(() => {
         fetchPosts()
         fetchComments()
     }, [fetchPosts, fetchComments])
 
     return (
-        <Container
-            fluid="md"
-            className="d-flex flex-wrap justify-content-center align-items-center"
-        >
+        <Container fluid="md" className="d-flex flex-column align-items-center">
+            <h1 className="display-1">Blog Posts</h1>
             {message ? (
-                <h3>{message}</h3>
+                <h3 className="display-3">{message}</h3>
             ) : (
-                posts &&
-                posts.map((post) => {
-                    return (
-                        <PostCard
-                            title={post.title}
-                            image={post.image}
-                            date={post.created_at}
-                            id={post.id}
-                        />
-                    )
-                })
+                <Container className="d-flex flex-wrap justify-content-center align-items-center">
+                    {posts &&
+                        posts.map((post) => {
+                            return (
+                                <PostCard
+                                    title={post.title}
+                                    image={post.image}
+                                    legend={post.legend}
+                                    date={post.created_at}
+                                    id={post.id}
+                                />
+                            )
+                        })}
+                </Container>
             )}
         </Container>
     )
