@@ -37,7 +37,7 @@ export function PostDetails({ posts, comments, message }: IPostDetailsProps) {
 // Connect to Redux
 const mapStateToProps = (state: TRootState) => ({
     posts: state.posts.data,
-    comments: state.comments.data,
+    comments: state.comments.data
 })
 
 export default connect(mapStateToProps)(PostDetails)

@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom'
 import fetchPosts from '../../actions/fetchPosts'
 import fetchComments from '../../actions/fetchComments'
 import { TRootState } from '../../reducers/rootReducer'
+import PostCard from './PostCard'
+import { Container } from 'react-bootstrap'
 
 // Types and interfaces
 export interface IPost {
@@ -29,7 +31,7 @@ export function PostsList({
     posts,
     message,
     fetchPosts,
-    fetchComments,
+    fetchComments
 }: IPostsListProps) {
     const history = useHistory()
 
@@ -39,28 +41,32 @@ export function PostsList({
     }, [fetchPosts, fetchComments])
 
     return (
-        <div>
+        <Container
+            fluid="md"
+            className="d-flex flex-wrap justify-content-center"
+        >
             {message ? (
                 <h3>{message}</h3>
             ) : (
                 posts &&
                 posts.map((post) => {
                     return (
-                        <div className="text-center">
-                            <h2>{post.title}</h2>
-                            <h3>{post.body}</h3>
-                        </div>
+                        <PostCard
+                            title={post.title}
+                            date={post.created_at}
+                            id={post.id}
+                        />
                     )
                 })
             )}
-        </div>
+        </Container>
     )
 }
 
 // Connect to Redux
 const mapStateToProps = (state: TRootState) => ({
     posts: state.posts.data,
-    message: state.posts.message,
+    message: state.posts.message
 })
 
 export default connect(mapStateToProps, { fetchPosts, fetchComments })(
