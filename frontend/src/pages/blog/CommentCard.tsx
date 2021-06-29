@@ -1,4 +1,4 @@
-import { Card, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 
 interface ICommentCardProps {
     username: string
@@ -12,7 +12,7 @@ export default function CommentCard({
     time
 }: ICommentCardProps) {
     return (
-        <Card className="my-2 mx-5 shadow">
+        <Card className="my-2 ml-5 mr-1 shadow">
             <Card.Header className="font-weight-bold py-1 px-3" as="h4">
                 {username}
                 <Card.Subtitle className="mt-1 text-muted">

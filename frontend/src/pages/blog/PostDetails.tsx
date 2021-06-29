@@ -1,5 +1,4 @@
 // Import components, functions, types, variables, and styles
-import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
@@ -9,13 +8,16 @@ import { TRootState } from '../../reducers/rootReducer'
 import { TPosts } from './PostsList'
 import fetchComments from '../../actions/fetchComments'
 import CommentCard from './CommentCard'
+import { Col, Container, Row } from 'react-bootstrap'
+import CommentForm from './CommentForm'
+import DeleteComment from './DeleteComment'
 
 // Types and interfaces
 export interface ICommentParams {
     id: string
 }
 
-interface IComment {
+export interface IComment {
     id: number
     modified_at: string
     body: string
@@ -53,7 +55,6 @@ export function PostDetails({
 
     let filteredComments = null
     if (comments) {
-        console.log(comments)
         filteredComments = comments.filter((item) => String(item.post) === id)
     }
 
@@ -81,15 +82,29 @@ export function PostDetails({
                     </h3>
                     {filteredComments.map((comment) => {
                         return (
-                            <CommentCard
-                                username={comment.username}
-                                body={comment.body}
-                                time={comment.modified_at}
-                            />
+                            <Row>
+                                <Col xs={10}>
+                                    <CommentCard
+                                        key={'c' + String(comment.id)}
+                                        username={comment.username}
+                                        body={comment.body}
+                                        time={comment.modified_at}
+                                    />
+                                </Col>
+                                <Col className="align-self-center ml-4">
+                                    <DeleteComment
+                                        key={'d' + String(comment.id)}
+                                        id={comment.id}
+                                    />
+                                </Col>
+                            </Row>
                         )
                     })}
                 </Container>
             )}
+            <Container className="d-flex flex-column justify-content-center">
+                <CommentForm id={id} />
+            </Container>
         </Container>
     )
 }

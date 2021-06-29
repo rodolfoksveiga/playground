@@ -12,6 +12,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'modified_at',
             'body',
             'post',
+            'user',
             'username'
         ]
 
