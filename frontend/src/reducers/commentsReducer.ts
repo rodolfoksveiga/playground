@@ -10,7 +10,7 @@ import {
     DELETE_COMMENT_FAIL,
     TDispatchDeleteComment
 } from '../actions/deleteComment'
-import { TComments } from '../pages/blog/PostDetails'
+import { TComments } from '../components/blog/PostDetails'
 
 // Types and interfaces
 interface ICommentsState {

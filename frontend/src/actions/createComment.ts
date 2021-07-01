@@ -2,8 +2,8 @@
 import axios from 'axios'
 import { Dispatch } from 'redux'
 
-import { IComment } from '../pages/blog/PostDetails'
-import { ICommentForm } from '../pages/blog/CommentForm'
+import { IComment } from '../components/blog/PostDetails'
+import { ICommentForm } from '../components/blog/CommentForm'
 
 // Types and interfaces
 interface ICreateCommentSuccess {

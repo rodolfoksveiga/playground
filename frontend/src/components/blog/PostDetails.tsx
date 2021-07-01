@@ -74,7 +74,7 @@ export function PostDetails({
     return (
         <Container>
             {message ? (
-                <h3>{message}</h3>
+                <p className="display-4">{message}</p>
             ) : (
                 post && (
                     <Container className="d-flex flex-column justify-content-center shadow">
@@ -83,7 +83,9 @@ export function PostDetails({
                             src={post.image}
                             alt={post.legend}
                         />
-                        <h2 className="display-2 mt-3 mb-1">{post.title}</h2>
+                        <h2 className="display-3 text-center mt-3 mb-1">
+                            {post.title}
+                        </h2>
                         <div className="mx-2">{parse(post.body)}</div>
                     </Container>
                 )

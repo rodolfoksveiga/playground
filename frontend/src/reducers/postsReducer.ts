@@ -3,9 +3,9 @@ import {
     FETCH_POSTS_LOADING,
     FETCH_POSTS_SUCCESS,
     FETCH_POSTS_FAIL,
-    TDispatchFetchPosts,
+    TDispatchFetchPosts
 } from '../actions/fetchPosts'
-import { TPosts } from '../pages/blog/PostsList'
+import { TPosts } from '../components/blog/PostsList'
 
 // Types and interfaces
 interface IFetchPostsState {
@@ -18,7 +18,7 @@ interface IFetchPostsState {
 const initialState = {
     isLoading: false,
     data: null,
-    message: null,
+    message: null
 }
 
 // Reducer
@@ -36,13 +36,13 @@ export function postsReducer(
             return {
                 isLoading: false,
                 data: action.payload,
-                message: null,
+                message: null
             }
         case FETCH_POSTS_FAIL:
             return {
                 isLoading: false,
                 data: null,
-                message: action.payload,
+                message: action.payload
             }
         default:
             return state

@@ -1,8 +1,18 @@
+import { connect } from 'react-redux'
 import { Navbar, Nav } from 'react-bootstrap'
+import logoutUser from '../actions/logoutUser'
+import { useHistory } from 'react-router-dom'
 
-export default function NavigationBar() {
+export function NavigationBar() {
+    const history = useHistory()
+
+    function handleLogout() {
+        logoutUser()
+        history.push('/user/login/')
+    }
+
     return (
-        <Navbar className="mb-2 mb-md-3 d-flex flex-column flex-md-row justify-content-between">
+        <Navbar className="mb-2 mb-md-3 d-flex flex-column flex-md-row justify-content-between shadow">
             <Navbar.Brand className="ml-2 font-size">
                 <b className="font-weight-bold">Rodolfo</b> Kirch Veiga
             </Navbar.Brand>
@@ -12,7 +22,13 @@ export default function NavigationBar() {
                 <Nav.Link href="/projects/">Projects</Nav.Link>
                 <Nav.Link href="/blog/">Blog</Nav.Link>
                 <Nav.Link href="/contact/">Contact</Nav.Link>
+                <Nav.Link href="/user/">Profile</Nav.Link>
+                <Nav.Link href="/user/register/">Register</Nav.Link>
+                <Nav.Link href="/user/login/">Login</Nav.Link>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             </Nav>
         </Navbar>
     )
 }
+
+export default connect(null, { logoutUser })(NavigationBar)

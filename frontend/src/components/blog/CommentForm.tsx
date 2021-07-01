@@ -69,7 +69,6 @@ export function CommentForm({
         <Formik
             initialValues={initialFormData}
             onSubmit={(form, { resetForm, setSubmitting }) => {
-                console.log(form)
                 handleSubmit(form)
                 resetForm()
                 setSubmitting(false)
@@ -90,14 +89,14 @@ export function CommentForm({
                         <Container fluid className="p-0">
                             <Row className="mx-0">
                                 <Col md={10} className="p-0">
+                                    <Card.Header
+                                        className="font-weight-bold py-1 px-3"
+                                        as="h4"
+                                    >
+                                        <Form.Label>Comment</Form.Label>
+                                    </Card.Header>
                                     <Card.Body className="p-0">
                                         <Form.Group controlId="body">
-                                            <Card.Header
-                                                className="font-weight-bold py-1 px-3"
-                                                as="h4"
-                                            >
-                                                <Form.Label>Comment</Form.Label>
-                                            </Card.Header>
                                             <Form.Control
                                                 className="border-0"
                                                 value={values.body}

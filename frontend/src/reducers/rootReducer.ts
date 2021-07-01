@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage'
 
 import { postsReducer } from './postsReducer'
 import { commentsReducer } from './commentsReducer'
+import { authUserReducer } from './authReducer'
 
 // Types and interfaces
 export type TRootState = ReturnType<typeof rootReducer>
@@ -12,12 +13,13 @@ export type TRootState = ReturnType<typeof rootReducer>
 // Reducer
 const persistConfig = {
     key: 'root',
-    storage,
+    storage
 }
 
 const rootReducer = combineReducers({
     posts: postsReducer,
     comments: commentsReducer,
+    auth: authUserReducer
 })
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer)

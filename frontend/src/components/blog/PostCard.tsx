@@ -24,8 +24,10 @@ export default function PostCard({
                 alt={legend}
             />
             <Card.Body className="text-center">
-                <Card.Title className="font-weight-bold">{title}</Card.Title>
-                <Card.Text>{date}</Card.Text>
+                <Card.Title className="font-weight-bold" as="h2">
+                    {title}
+                </Card.Title>
+                <Card.Text className="font-italic text-muted">{date}</Card.Text>
                 <Button variant="primary" href={'/blog/' + id + '/'}>
                     Read more
                 </Button>

@@ -41,9 +41,9 @@ export function PostsList({
 
     return (
         <Container fluid="md" className="d-flex flex-column align-items-center">
-            <h1 className="display-1">Blog Posts</h1>
+            <h1 className="display-3">Blog Posts</h1>
             {message ? (
-                <h3 className="display-3">{message}</h3>
+                <p className="display-4">{message}</p>
             ) : (
                 <Container className="d-flex flex-wrap justify-content-center align-items-center">
                     {posts &&

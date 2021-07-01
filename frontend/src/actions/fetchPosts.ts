@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { Dispatch } from 'redux'
 
-import { TPosts } from '../pages/blog/PostsList'
+import { TPosts } from '../components/blog/PostsList'
 
 // Action types
 const URL = 'http://localhost:8000/api/posts/'
@@ -25,7 +25,10 @@ interface IFetchPostsFail {
     payload: string
 }
 
-export type TDispatchFetchPosts = IFetchPostsLoading | IFetchPostsSuccess | IFetchPostsFail
+export type TDispatchFetchPosts =
+    | IFetchPostsLoading
+    | IFetchPostsSuccess
+    | IFetchPostsFail
 
 // Action
 export default function fetchPosts() {
@@ -39,12 +42,12 @@ export default function fetchPosts() {
 
             dispatch({
                 type: FETCH_POSTS_SUCCESS,
-                payload: response.data,
+                payload: response.data
             })
         } catch (error) {
             dispatch({
                 type: FETCH_POSTS_FAIL,
-                payload: 'Error while loading the Posts List. Reload the page.',
+                payload: 'Error while loading the Posts List. Reload the page.'
             })
 
             console.log(error)

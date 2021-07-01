@@ -2,10 +2,13 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 
-import Home from './pages/Home'
+import Home from './components/Home'
 import NavigationBar from './components/NavigationBar'
-import PostsList from './pages/blog/PostsList'
-import PostDetails from './pages/blog/PostDetails'
+import PostsList from './components/blog/PostsList'
+import PostDetails from './components/blog/PostDetails'
+import Register from './components/auth/Register'
+import Login from './components/auth/Login'
+import Profile from './components/auth/Dashboard'
 
 // Component
 export default function App() {
@@ -17,6 +20,9 @@ export default function App() {
                     <Route path="/" component={Home} exact />
                     <Route path="/blog/" component={PostsList} exact />
                     <Route path="/blog/:id/" exact component={PostDetails} />
+                    <Route path="/user/" exact component={Profile} />
+                    <Route path="/user/register/" exact component={Register} />
+                    <Route path="/user/login/" exact component={Login} />
                 </Switch>
             </Container>
         </BrowserRouter>

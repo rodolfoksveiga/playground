@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { Dispatch } from 'redux'
 
-import { TComments } from '../pages/blog/PostDetails'
+import { TComments } from '../components/blog/PostDetails'
 
 // Action types
 const URL = 'http://localhost:8000/api/comments/'
@@ -25,7 +25,10 @@ interface IFetchCommentsFail {
     payload: string
 }
 
-export type TDispatchFetchComments = IFetchCommentsLoading | IFetchCommentsSuccess | IFetchCommentsFail
+export type TDispatchFetchComments =
+    | IFetchCommentsLoading
+    | IFetchCommentsSuccess
+    | IFetchCommentsFail
 
 // Action
 export default function fetchComments() {
@@ -39,12 +42,12 @@ export default function fetchComments() {
 
             dispatch({
                 type: FETCH_COMMENTS_SUCCESS,
-                payload: response.data,
+                payload: response.data
             })
         } catch (error) {
             dispatch({
                 type: FETCH_COMMENTS_FAIL,
-                payload: 'Error while loading the comments. Reload the page.',
+                payload: 'Error while loading the comments. Reload the page.'
             })
 
             console.log(error)
