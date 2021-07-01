@@ -25,10 +25,6 @@ class Comment(Model):
         on_delete=CASCADE,
         related_name='comments'
     )
-    deleted = BooleanField(
-        _('Deleted'),
-        default=False
-    )
     user = ForeignKey(
         User,
         on_delete=CASCADE,

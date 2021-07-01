@@ -28,10 +28,6 @@ class Post(Model):
         _('Legend'),
         max_length=200
     )
-    deleted = BooleanField(
-        _('Deleted'),
-        default=False
-    )
 
     def __str__(self):
         return self.title

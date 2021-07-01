@@ -2,15 +2,14 @@
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { TRootState } from '../../reducers/rootReducer'
 import { TPosts } from './PostsList'
 import fetchComments from '../../actions/fetchComments'
 import CommentCard from './CommentCard'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Button, Container, Row } from 'react-bootstrap'
 import CommentForm from './CommentForm'
-import DeleteComment from './DeleteComment'
 
 // Types and interfaces
 export interface ICommentParams {
@@ -22,7 +21,6 @@ export interface IComment {
     modified_at: string
     body: string
     post: number
-    deleted: boolean
     username: string
 }
 
@@ -43,10 +41,17 @@ export function PostDetails({
     fetchComments
 }: IPostDetailsProps) {
     const { id } = useParams<ICommentParams>()
+    const [triggerReload, setTriggerReload] = useState<boolean>(false)
+    const [toggleCreate, setToggleCreate] = useState<boolean>(false)
+    const [vertical, setVertical] = useState<boolean>(window.innerWidth >= 768)
 
     useEffect(() => {
         fetchComments()
-    }, [fetchComments])
+        window.addEventListener('resize', () =>
+            setVertical(window.innerWidth >= 768)
+        )
+        setTriggerReload(false)
+    }, [fetchComments, triggerReload])
 
     let post = null
     if (posts) {
@@ -56,6 +61,14 @@ export function PostDetails({
     let filteredComments = null
     if (comments) {
         filteredComments = comments.filter((item) => String(item.post) === id)
+    }
+
+    function handleToggleCreate() {
+        setToggleCreate(!toggleCreate)
+    }
+
+    function handleTriggerReload() {
+        setTriggerReload(!triggerReload)
     }
 
     return (
@@ -75,36 +88,47 @@ export function PostDetails({
                     </Container>
                 )
             )}
+            <Container className="my-3">
+                <h3 className="display-4 mb-4 mx-3 px-3 border shadow">
+                    Comments
+                </h3>
+                {!toggleCreate ? (
+                    <Row className="justify-content-center">
+                        <Button
+                            className="font-weight-bold p-1 p-md-3 shadow"
+                            variant="success"
+                            onClick={handleToggleCreate}
+                        >
+                            Add a new comment
+                        </Button>
+                    </Row>
+                ) : (
+                    <CommentForm
+                        initialFormData={{
+                            body: '',
+                            post: Number(id),
+                            user: 1
+                        }}
+                        vertical={vertical}
+                        handleToggleCreate={handleToggleCreate}
+                        handleTriggerReload={handleTriggerReload}
+                    />
+                )}
+            </Container>
             {filteredComments && (
-                <Container className="d-flex flex-column justify-content-center">
-                    <h3 className="display-4 mt-4 mx-3 px-3 border shadow">
-                        Comments
-                    </h3>
+                <Container>
                     {filteredComments.map((comment) => {
                         return (
-                            <Row>
-                                <Col xs={10}>
-                                    <CommentCard
-                                        key={'c' + String(comment.id)}
-                                        username={comment.username}
-                                        body={comment.body}
-                                        time={comment.modified_at}
-                                    />
-                                </Col>
-                                <Col className="align-self-center ml-4">
-                                    <DeleteComment
-                                        key={'d' + String(comment.id)}
-                                        id={comment.id}
-                                    />
-                                </Col>
-                            </Row>
+                            <CommentCard
+                                key={'c' + String(comment.id)}
+                                comment={comment}
+                                vertical={vertical}
+                                handleTriggerReload={handleTriggerReload}
+                            />
                         )
                     })}
                 </Container>
             )}
-            <Container className="d-flex flex-column justify-content-center">
-                <CommentForm id={id} />
-            </Container>
         </Container>
     )
 }

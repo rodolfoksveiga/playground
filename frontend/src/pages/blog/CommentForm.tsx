@@ -1,6 +1,14 @@
 import { connect } from 'react-redux'
 import { Formik } from 'formik'
-import { Button, ButtonGroup, Form } from 'react-bootstrap'
+import {
+    Button,
+    ButtonGroup,
+    Card,
+    Col,
+    Container,
+    Form,
+    Row
+} from 'react-bootstrap'
 import * as yup from 'yup'
 
 import createComment from '../../actions/createComment'
@@ -12,8 +20,12 @@ export interface ICommentForm {
 }
 
 interface ICommentFormProps {
-    id: string
+    initialFormData: ICommentForm
+    vertical: boolean
     createComment: Function
+    handleToggleCreate?: Function
+    handleToggleUpdate?: Function
+    handleTriggerReload: Function
 }
 
 const FormSchema = yup.object().shape({
@@ -24,23 +36,44 @@ const FormSchema = yup.object().shape({
         .max(600, 'Comment must have less than 600 characters.')
 })
 
-export function CommentForm({ id, createComment }: ICommentFormProps) {
-    function handleCreateComment(formData: ICommentForm) {
-        createComment(formData)
+export function CommentForm({
+    initialFormData,
+    vertical,
+    createComment,
+    handleToggleCreate,
+    handleToggleUpdate,
+    handleTriggerReload
+}: ICommentFormProps) {
+    function handleSubmit(formData: ICommentForm) {
+        if (handleToggleCreate) {
+            createComment(formData)
+            handleToggleCreate()
+        }
+        if (handleToggleUpdate) {
+            createComment(formData)
+            handleToggleUpdate()
+        }
+    }
+
+    function handleCancel() {
+        if (handleToggleCreate) {
+            handleToggleCreate()
+        }
+
+        if (handleToggleUpdate) {
+            handleToggleUpdate()
+        }
     }
 
     return (
         <Formik
-            initialValues={{
-                body: '',
-                post: Number(id),
-                user: 1
-            }}
+            initialValues={initialFormData}
             onSubmit={(form, { resetForm, setSubmitting }) => {
                 console.log(form)
-                handleCreateComment(form)
+                handleSubmit(form)
                 resetForm()
                 setSubmitting(false)
+                handleTriggerReload()
             }}
             validationSchema={FormSchema}
         >
@@ -52,41 +85,67 @@ export function CommentForm({ id, createComment }: ICommentFormProps) {
                 handleChange,
                 handleReset
             }) => (
-                <Form
-                    className="d-flex flex-column mx-5 my-2 shadow border"
-                    noValidate
-                    onSubmit={handleSubmit}
-                >
-                    <Form.Group className="px-3 py-1" controlId="body">
-                        <Form.Label className="font-weight-bold px-4">
-                            New comment
-                        </Form.Label>
-                        <Form.Control
-                            value={values.body}
-                            type="text"
-                            as="textarea"
-                            placeholder="Write your comment here..."
-                            rows={3}
-                            onChange={handleChange}
-                            isInvalid={!!errors.body}
-                            isValid={touched.body && !errors.body}
-                        />
-                        <Form.Control.Feedback className="pl-2" type="invalid">
-                            {errors.body}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <ButtonGroup className="align-self-center pb-1 mb-3">
-                        <Button variant="primary" type="submit">
-                            Add comment
-                        </Button>
-                        <Button
-                            variant="secondary"
-                            type="reset"
-                            onClick={handleReset}
-                        >
-                            Clear
-                        </Button>
-                    </ButtonGroup>
+                <Form noValidate onSubmit={handleSubmit}>
+                    <Card className="my-2 mx-5 shadow">
+                        <Container fluid className="p-0">
+                            <Row className="mx-0">
+                                <Col md={10} className="p-0">
+                                    <Card.Body className="p-0">
+                                        <Form.Group controlId="body">
+                                            <Card.Header
+                                                className="font-weight-bold py-1 px-3"
+                                                as="h4"
+                                            >
+                                                <Form.Label>Comment</Form.Label>
+                                            </Card.Header>
+                                            <Form.Control
+                                                className="border-0"
+                                                value={values.body}
+                                                type="text"
+                                                as="textarea"
+                                                placeholder="Write your comment here..."
+                                                rows={3}
+                                                onChange={handleChange}
+                                                isInvalid={!!errors.body}
+                                                isValid={
+                                                    touched.body && !errors.body
+                                                }
+                                            />
+                                            <Form.Control.Feedback
+                                                className="pl-2"
+                                                type="invalid"
+                                            >
+                                                {errors.body}
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                    </Card.Body>
+                                </Col>
+                                <Col
+                                    md={2}
+                                    className="d-flex border-top border-left py-1 py-md-0 my-0 text-center justify-content-center align-items-center"
+                                >
+                                    <ButtonGroup vertical={vertical}>
+                                        <Button variant="success" type="submit">
+                                            Save
+                                        </Button>
+                                        <Button
+                                            variant="secondary"
+                                            type="reset"
+                                            onClick={handleReset}
+                                        >
+                                            Clear
+                                        </Button>
+                                        <Button
+                                            variant="danger"
+                                            onClick={handleCancel}
+                                        >
+                                            Cancel
+                                        </Button>
+                                    </ButtonGroup>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Card>
                 </Form>
             )}
         </Formik>

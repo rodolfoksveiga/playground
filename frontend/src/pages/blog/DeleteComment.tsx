@@ -8,12 +8,18 @@ import deleteComment from '../../actions/deleteComment'
 interface IDeleteCommentProps {
     id: number
     deleteComment: Function
+    handleTriggerReload: Function
 }
 
 // Main component
-export function DeleteComment({ id, deleteComment }: IDeleteCommentProps) {
+export function DeleteComment({
+    id,
+    deleteComment,
+    handleTriggerReload
+}: IDeleteCommentProps) {
     function handleDelete() {
         deleteComment(id)
+        handleTriggerReload()
     }
 
     return (
