@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom'
 import * as yup from 'yup'
 
 import loginUser from '../../actions/loginUser'
+import { TRootState } from '../../reducers/rootReducer'
 
 interface ILoginProps {
+    isAuthenticated: boolean
     loginUser: Function
 }
 
@@ -19,13 +21,12 @@ const FormSchema = yup.object().shape({
         .required('Required field.')
 })
 
-export function Login({ loginUser }: ILoginProps) {
+export function Login({ isAuthenticated, loginUser }: ILoginProps) {
     return (
         <Formik
             initialValues={{
                 email: '',
-                password: '',
-                passwordConfirm: ''
+                password: ''
             }}
             onSubmit={(form, { resetForm, setSubmitting }) => {
                 loginUser(form.email, form.password)
@@ -106,4 +107,8 @@ export function Login({ loginUser }: ILoginProps) {
     )
 }
 
-export default connect(null, { loginUser })(Login)
+const mapStateToProps = (state: TRootState) => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { loginUser })(Login)

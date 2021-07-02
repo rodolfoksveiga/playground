@@ -1,3 +1,4 @@
+// Import components, functions, types, variables, and styles
 import { Dispatch } from 'react'
 import { auth } from '../firebase'
 import { User } from '@firebase/auth-types'

@@ -31,7 +31,6 @@ export function Register({ registerUser }: IRegisterProps) {
                 passwordConfirm: ''
             }}
             onSubmit={(form, { resetForm, setSubmitting }) => {
-                console.log(form)
                 registerUser(form.email, form.password)
                 resetForm()
                 setSubmitting(false)

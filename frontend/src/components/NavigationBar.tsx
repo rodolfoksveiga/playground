@@ -3,7 +3,11 @@ import { Navbar, Nav } from 'react-bootstrap'
 import logoutUser from '../actions/logoutUser'
 import { useHistory } from 'react-router-dom'
 
-export function NavigationBar() {
+interface INavigationBarProps {
+    logoutUser: Function
+}
+
+export function NavigationBar({ logoutUser }: INavigationBarProps) {
     const history = useHistory()
 
     function handleLogout() {

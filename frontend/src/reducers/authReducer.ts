@@ -17,57 +17,59 @@ import {
 import { User } from '@firebase/auth-types'
 
 // Types and interfaces
-interface IAuthUserState {
+interface IAuthState {
+    isAuthenticated: boolean
     user: null | User
     message: null | string
 }
 
-type TDispatchAuthUser =
+type TDispatchAuth =
     | TDispatchRegisterUser
     | TDispatchLoginUser
     | TDispatchLogoutUser
 
 // Global variables
 const initialState = {
+    isAuthenticated: false,
     user: null,
     message: null
 }
 
 // Reducer
-export function authUserReducer(
-    state: IAuthUserState = initialState,
-    action: TDispatchAuthUser
+export function authReducer(
+    state: IAuthState = initialState,
+    action: TDispatchAuth
 ) {
     switch (action.type) {
         case REGISTER_USER_SUCCESS:
             return {
+                isAuthenticated: true,
                 user: action.payload,
                 message: null
             }
         case REGISTER_USER_FAIL:
             return {
-                user: null,
+                ...state,
                 message: action.payload
             }
         case LOGIN_USER_SUCCESS:
             return {
+                isAuthenticated: true,
                 user: action.payload,
                 message: null
             }
         case LOGIN_USER_FAIL:
             return {
-                user: null,
+                ...state,
                 message: action.payload
             }
         case LOGOUT_USER_SUCCESS:
             return {
+                isAuthenticated: false,
                 user: null,
                 message: null
             }
         case LOGOUT_USER_FAIL:
-            return {
-                ...state
-            }
         default:
             return state
     }
