@@ -5,32 +5,38 @@ import {
     TDispatchRegisterUser
 } from '../actions/registerUser'
 import {
+    LOAD_USER_SUCCESS,
+    LOAD_USER_FAIL,
+    TDispatchLoadUser,
+    IUser
+} from '../actions/loadUser'
+import {
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
     TDispatchLoginUser
 } from '../actions/loginUser'
-import {
-    LOGOUT_USER_SUCCESS,
-    LOGOUT_USER_FAIL,
-    TDispatchLogoutUser
-} from '../actions/logoutUser'
-import { User } from '@firebase/auth-types'
+import { LOGOUT_USER, IDispatchLogoutUser } from '../actions/logoutUser'
 
 // Types and interfaces
-interface IAuthState {
-    isAuthenticated: boolean
-    user: null | User
-    message: null | string
-}
-
 type TDispatchAuth =
     | TDispatchRegisterUser
+    | TDispatchLoadUser
     | TDispatchLoginUser
-    | TDispatchLogoutUser
+    | IDispatchLogoutUser
+
+interface IAuthState {
+    isAuthenticated: boolean
+    accessToken: null | string
+    refreshToken: null | string
+    user: null | IUser
+    message: null | string
+}
 
 // Global variables
 const initialState = {
     isAuthenticated: false,
+    accessToken: null,
+    refreshToken: null,
     user: null,
     message: null
 }
@@ -44,32 +50,57 @@ export function authReducer(
         case REGISTER_USER_SUCCESS:
             return {
                 isAuthenticated: true,
-                user: action.payload,
-                message: null
+                accessToken: null,
+                refreshToken: null,
+                user: null,
+                message: action.payload
             }
         case REGISTER_USER_FAIL:
             return {
-                ...state,
+                isAuthenticated: false,
+                accessToken: null,
+                refreshToken: null,
+                user: null,
                 message: action.payload
+            }
+        case LOAD_USER_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload,
+                message: null
+            }
+        case LOAD_USER_FAIL:
+            return {
+                ...state,
+                isAuthenticated: false,
+                accessToken: null,
+                message: null
             }
         case LOGIN_USER_SUCCESS:
             return {
+                ...state,
                 isAuthenticated: true,
-                user: action.payload,
+                accessToken: action.payload.access,
+                refreshToken: action.payload.refresh,
                 message: null
             }
         case LOGIN_USER_FAIL:
             return {
                 ...state,
+                isAuthenticated: false,
+                accessToken: null,
+                refreshToken: null,
                 message: action.payload
             }
-        case LOGOUT_USER_SUCCESS:
+        case LOGOUT_USER:
             return {
                 isAuthenticated: false,
+                accessToken: null,
+                refreshToken: null,
                 user: null,
                 message: null
             }
-        case LOGOUT_USER_FAIL:
         default:
             return state
     }

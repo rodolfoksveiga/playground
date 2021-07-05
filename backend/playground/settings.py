@@ -1,14 +1,16 @@
 from pathlib import Path
-from safe import SECRET_KEY
+from datetime import timedelta
+from safe import SECRET_KEY, EMAIL_HOST_PASSWORD
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# set debug to false when the app is in production
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'playground.herokuapp.com'
 ]
 
 INSTALLED_APPS = [
@@ -20,9 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'users',
-    'posts',
-    'comments'
+    'djoser',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,6 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-AUTH_USER_MODEL = 'users.User'
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -98,12 +97,50 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
 
-DJANGO_RESTFRAMEWORK = {
+REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
     ]
 }
 
-MEDIA_URL = '/media/'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'my.tastings.app@gmail.com'
+EMAIL_USE_TLS = True
 
-MEDIA_ROOT = BASE_DIR / 'media/'
+LOGIN_REDIRECT_URL = '/api/auth/users'
+
+AUTH_USER_MODEL = 'users.User'
+
+DOMAIN = ('localhost:3000')
+SITE_NAME = ('My Project')
+
+DJOSER = {
+    'LOGIN_FIELD': 'username',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    'USERNAME_RESET_CONFIRM_URL': 'reset-username-confirm/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'reset-password-confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {
+        'user_create': 'auth.serializers.UserCreateSerializer',
+        'user': 'auth.serializers.UserCreateSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer'
+    }
+}
+
+SIMPLE_JWT = {
+    'LOGIN_FIELD': 'username',
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
+}
+

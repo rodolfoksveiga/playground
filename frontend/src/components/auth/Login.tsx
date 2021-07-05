@@ -13,7 +13,7 @@ interface ILoginProps {
 }
 
 const FormSchema = yup.object().shape({
-    email: yup.string().email('Invalid email.').required('Required field.'),
+    username: yup.string().required('Required field.'),
     password: yup
         .string()
         .min(8, 'Password must be at least 8 characters long.')
@@ -21,15 +21,15 @@ const FormSchema = yup.object().shape({
         .required('Required field.')
 })
 
-export function Login({ isAuthenticated, loginUser }: ILoginProps) {
+export function Login({ loginUser }: ILoginProps) {
     return (
         <Formik
             initialValues={{
-                email: '',
+                username: '',
                 password: ''
             }}
             onSubmit={(form, { resetForm, setSubmitting }) => {
-                loginUser(form.email, form.password)
+                loginUser(form.username, form.password)
                 resetForm()
                 setSubmitting(false)
             }}
@@ -50,22 +50,24 @@ export function Login({ isAuthenticated, loginUser }: ILoginProps) {
                             Login
                         </Card.Header>
                         <Card.Body className="my-2 py-0">
-                            <Form.Group controlId="email">
-                                <Form.Label>Email</Form.Label>
+                            <Form.Group controlId="username">
+                                <Form.Label>Username</Form.Label>
                                 <Form.Control
-                                    value={values.email}
-                                    type="email"
-                                    placeholder="Email"
+                                    value={values.username}
+                                    type="username"
+                                    placeholder="Username"
                                     onChange={handleChange}
-                                    isInvalid={!!errors.email}
-                                    isValid={touched.email && !errors.email}
+                                    isInvalid={!!errors.username}
+                                    isValid={
+                                        touched.username && !errors.username
+                                    }
                                     required
                                 />
                                 <Form.Control.Feedback
                                     className="pl-2"
                                     type="invalid"
                                 >
-                                    {errors.email}
+                                    {errors.username}
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group controlId="password">

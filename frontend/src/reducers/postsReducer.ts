@@ -8,7 +8,7 @@ import {
 import { TPosts } from '../components/blog/PostsList'
 
 // Types and interfaces
-interface IFetchPostsState {
+interface IPostsState {
     isLoading: boolean
     data: null | TPosts
     message: null | string
@@ -23,7 +23,7 @@ const initialState = {
 
 // Reducer
 export function postsReducer(
-    state: IFetchPostsState = initialState,
+    state: IPostsState = initialState,
     action: TDispatchFetchPosts
 ) {
     switch (action.type) {

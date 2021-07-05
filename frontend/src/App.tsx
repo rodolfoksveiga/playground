@@ -8,7 +8,7 @@ import PostsList from './components/blog/PostsList'
 import PostDetails from './components/blog/PostDetails'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
-import Profile from './components/auth/Dashboard'
+import Profile from './components/auth/Profile'
 
 // Component
 export default function App() {

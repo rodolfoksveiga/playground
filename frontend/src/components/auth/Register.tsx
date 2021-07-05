@@ -11,6 +11,7 @@ interface IRegisterProps {
 }
 
 const FormSchema = yup.object().shape({
+    username: yup.string().required('Required field.'),
     email: yup.string().email('Invalid email.').required('Required field.'),
     password: yup
         .string()
@@ -26,12 +27,18 @@ export function Register({ registerUser }: IRegisterProps) {
     return (
         <Formik
             initialValues={{
+                username: '',
                 email: '',
                 password: '',
                 passwordConfirm: ''
             }}
             onSubmit={(form, { resetForm, setSubmitting }) => {
-                registerUser(form.email, form.password)
+                registerUser(
+                    form.username,
+                    form.email,
+                    form.password,
+                    form.passwordConfirm
+                )
                 resetForm()
                 setSubmitting(false)
             }}
@@ -52,6 +59,26 @@ export function Register({ registerUser }: IRegisterProps) {
                             Register
                         </Card.Header>
                         <Card.Body className="my-2 py-0">
+                            <Form.Group controlId="username">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control
+                                    value={values.username}
+                                    type="text"
+                                    placeholder="Username"
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.username}
+                                    isValid={
+                                        touched.username && !errors.username
+                                    }
+                                    required
+                                />
+                                <Form.Control.Feedback
+                                    className="pl-2"
+                                    type="invalid"
+                                >
+                                    {errors.username}
+                                </Form.Control.Feedback>
+                            </Form.Group>
                             <Form.Group controlId="email">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control

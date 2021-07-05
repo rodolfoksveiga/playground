@@ -43,7 +43,6 @@ class UserAccountManager(BaseUserManager):
         user = self.create_user(username, email, password, **other_fields)
         return user
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     objects = UserAccountManager()
 
@@ -64,22 +63,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = CharField(
         _('First name'),
         max_length=150,
-        blank=True,
-        null=True
+        blank=True
     )
     last_name = CharField(
         _('Last name'),
         max_length=150,
-        blank=True,
-        null=True
-
+        blank=True
     )
     about = TextField(
         _('About'),
         max_length=500,
-        blank=True,
-        null=True
-
+        blank=True
     )
     is_active = BooleanField(
         default=True

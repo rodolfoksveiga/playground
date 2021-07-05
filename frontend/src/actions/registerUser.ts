@@ -1,12 +1,11 @@
 // Import components, functions, types, variables, and styles
+import axios from 'axios'
 import { Dispatch } from 'redux'
-import { auth } from '../firebase'
-import { User } from '@firebase/auth-types'
 
 // Types and interfaces
 interface IRegisterUserSuccess {
     type: typeof REGISTER_USER_SUCCESS
-    payload: User
+    payload: string
 }
 
 interface IRegisterUserFail {
@@ -17,24 +16,39 @@ interface IRegisterUserFail {
 export type TDispatchRegisterUser = IRegisterUserSuccess | IRegisterUserFail
 
 // Action types
+const URL = 'http://localhost:8000/api/auth/'
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
 export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL'
 
 // Actions
-export default function registerUser(email: string, password: string) {
+export default function registerUser(
+    username: string,
+    email: string,
+    password: string,
+    passwordConfirm: string
+) {
     return async (dispatch: Dispatch<TDispatchRegisterUser>) => {
-        try {
-            const response = await auth.createUserWithEmailAndPassword(
-                email,
-                password
-            )
+        const body = JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+            re_password: passwordConfirm
+        })
 
-            if (response.user) {
-                dispatch({
-                    type: REGISTER_USER_SUCCESS,
-                    payload: response.user
-                })
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
             }
+        }
+
+        try {
+            await axios.post(URL + 'users/', body, config)
+
+            dispatch({
+                type: REGISTER_USER_SUCCESS,
+                payload:
+                    'User registered. Please, check your email to activate your account.'
+            })
         } catch (error) {
             dispatch({
                 type: REGISTER_USER_FAIL,
