@@ -38,8 +38,7 @@ type TDispatchAuth =
 
 interface IAuthState {
     isAuthenticated: boolean
-    accessToken: null | string
-    refreshToken: null | string
+    token: null | string
     user: null | IUser
     message: null | string
 }
@@ -47,8 +46,7 @@ interface IAuthState {
 // Global variables
 const initialState = {
     isAuthenticated: false,
-    accessToken: null,
-    refreshToken: null,
+    token: null,
     user: null,
     message: null
 }
@@ -62,16 +60,14 @@ export function authReducer(
         case REGISTER_USER_SUCCESS:
             return {
                 isAuthenticated: true,
-                accessToken: null,
-                refreshToken: null,
+                token: null,
                 user: null,
                 message: action.payload
             }
         case REGISTER_USER_FAIL:
             return {
                 isAuthenticated: false,
-                accessToken: null,
-                refreshToken: null,
+                token: null,
                 user: null,
                 message: action.payload
             }
@@ -91,16 +87,14 @@ export function authReducer(
             return {
                 ...state,
                 isAuthenticated: true,
-                accessToken: action.payload.access,
-                refreshToken: action.payload.refresh,
+                token: action.payload,
                 message: null
             }
         case LOGIN_USER_FAIL:
             return {
                 ...state,
                 isAuthenticated: false,
-                accessToken: null,
-                refreshToken: null,
+                token: null,
                 message: action.payload
             }
         case LOAD_USER_SUCCESS:
@@ -114,7 +108,7 @@ export function authReducer(
             return {
                 ...state,
                 isAuthenticated: false,
-                accessToken: null,
+                token: null,
                 message: null
             }
         case CHECK_USER_SUCCESS:
@@ -125,13 +119,13 @@ export function authReducer(
         case CHECK_USER_FAIL:
             return {
                 ...state,
-                isAuthenticated: false
+                isAuthenticated: false,
+                token: null
             }
         case LOGOUT_USER:
             return {
                 isAuthenticated: false,
-                accessToken: null,
-                refreshToken: null,
+                token: null,
                 user: null,
                 message: null
             }

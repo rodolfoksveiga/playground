@@ -26,13 +26,13 @@ export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS'
 export const LOAD_USER_FAIL = 'LOAD_USER_FAIL'
 
 // Actions
-export default function loadUser(access: string | null) {
+export default function loadUser(token: string | null) {
     return async (dispatch: Dispatch<TDispatchLoadUser>) => {
-        if (access) {
+        if (token) {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + access,
+                    Authorization: 'Bearer ' + token,
                     Accept: 'application/json'
                 }
             }

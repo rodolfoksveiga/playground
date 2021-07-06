@@ -1,6 +1,6 @@
 // Import components, functions, types, variables, and styles
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
+import { connect } from 'react-redux'
 
 import Home from './components/Home'
 import NavigationBar from './components/NavigationBar'
@@ -10,9 +10,33 @@ import Register from './components/auth/Register'
 import Activate from './components/auth/Activate'
 import Login from './components/auth/Login'
 import Profile from './components/auth/Profile'
+import checkUser from './actions/checkUser'
+import loadUser from './actions/loadUser'
+import { TRootState } from './reducers/rootReducer'
+import { useEffect } from 'react'
+
+// Types and interfaces
+interface IAppProps {
+    isAuthenticated: boolean
+    token: null | string
+    checkUser: Function
+    loadUser: Function
+}
 
 // Component
-export default function App() {
+export function App({
+    isAuthenticated,
+    token,
+    checkUser,
+    loadUser
+}: IAppProps) {
+    useEffect(() => {
+        checkUser(token)
+        if (isAuthenticated) {
+            loadUser(token)
+        }
+    }, [isAuthenticated, token, checkUser, loadUser])
+
     return (
         <BrowserRouter>
             <NavigationBar />
@@ -32,3 +56,11 @@ export default function App() {
         </BrowserRouter>
     )
 }
+
+// Connect to Redux
+const mapStateToProps = (state: TRootState) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    token: state.auth.token
+})
+
+export default connect(mapStateToProps, { checkUser, loadUser })(App)

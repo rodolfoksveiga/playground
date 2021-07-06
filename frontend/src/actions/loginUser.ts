@@ -7,10 +7,7 @@ import loadUser from './loadUser'
 // Types and interfaces
 interface ILoginUserSuccess {
     type: typeof LOGIN_USER_SUCCESS
-    payload: {
-        access: string
-        refresh: string
-    }
+    payload: string
 }
 
 interface ILoginUserFail {
@@ -44,7 +41,7 @@ export default function loginUser(username: string, password: string) {
 
             dispatch({
                 type: LOGIN_USER_SUCCESS,
-                payload: response.data
+                payload: response.data.access
             })
 
             // TODO: Check which type to use here (Mon 05 Jul 2021 01:27:09 PM CEST).

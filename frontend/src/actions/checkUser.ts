@@ -19,9 +19,9 @@ export const CHECK_USER_SUCCESS = 'CHECK_USER_SUCCESS'
 export const CHECK_USER_FAIL = 'CHECK_USER_FAIL'
 
 // Actions
-export default function checkUser(accessToken: null | string) {
+export default function checkUser(token: null | string) {
     return async (dispatch: Dispatch<TDispatchCheckUser>) => {
-        if (accessToken) {
+        if (token) {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export default function checkUser(accessToken: null | string) {
             }
 
             const body = JSON.stringify({
-                token: accessToken
+                token: token
             })
 
             try {
@@ -46,8 +46,7 @@ export default function checkUser(accessToken: null | string) {
                     })
                 } else {
                     dispatch({
-                        type: CHECK_USER_FAIL,
-                        payload: 'Token is invalid or expired.'
+                        type: CHECK_USER_FAIL
                     })
                 }
             } catch (error) {

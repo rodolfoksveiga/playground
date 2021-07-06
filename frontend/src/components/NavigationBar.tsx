@@ -22,6 +22,7 @@ export function NavigationBar({
 
     return (
         <Navbar
+            className="shadow"
             bg="dark"
             variant="dark"
             sticky="top"
