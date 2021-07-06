@@ -1,8 +1,8 @@
 // Import components, functions, types, and variables
 import { Formik } from 'formik'
 import { connect } from 'react-redux'
-import { Button, Card, Form } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Alert, Button, Card, Form } from 'react-bootstrap'
+import { Link, useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 
 import loginUser from '../../actions/loginUser'
@@ -11,6 +11,8 @@ import { TRootState } from '../../reducers/rootReducer'
 // Types and interfaces
 interface ILoginProps {
     isAuthenticated: boolean
+    failed: boolean
+    message: null | string
     loginUser: Function
 }
 
@@ -25,7 +27,18 @@ const FormSchema = yup.object().shape({
 })
 
 // Component
-export function Login({ loginUser }: ILoginProps) {
+export function Login({
+    isAuthenticated,
+    failed,
+    message,
+    loginUser
+}: ILoginProps) {
+    const history = useHistory()
+
+    if (isAuthenticated) {
+        history.push('/')
+    }
+
     return (
         <Formik
             initialValues={{
@@ -42,11 +55,11 @@ export function Login({ loginUser }: ILoginProps) {
         >
             {({ values, touched, errors, handleSubmit, handleChange }) => (
                 <Form
-                    className="d-flex justify-content-center pb-4"
+                    className="d-flex justify-content-center py-2 py-md-4"
                     noValidate
                     onSubmit={handleSubmit}
                 >
-                    <Card className="shadow">
+                    <Card className="shadow" style={{ width: '400px' }}>
                         <Card.Header
                             className="display-3 text-center py-2"
                             as="h1"
@@ -54,6 +67,11 @@ export function Login({ loginUser }: ILoginProps) {
                             Login
                         </Card.Header>
                         <Card.Body className="my-2 py-0">
+                            {message && (
+                                <Alert variant={failed ? 'danger' : 'success'}>
+                                    {message}
+                                </Alert>
+                            )}
                             <Form.Group controlId="username">
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control
@@ -115,7 +133,9 @@ export function Login({ loginUser }: ILoginProps) {
 
 // Redux
 const mapStateToProps = (state: TRootState) => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    failed: state.auth.failed,
+    message: state.auth.message
 })
 
 export default connect(mapStateToProps, { loginUser })(Login)

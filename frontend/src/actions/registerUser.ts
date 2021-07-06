@@ -49,9 +49,24 @@ export default function registerUser(
                     'User registered. Please, check your email to activate your account.'
             })
         } catch (error) {
+            let message = ''
+            const hasUsername = error.response.data.hasOwnProperty('username')
+            const hasEmail = error.response.data.hasOwnProperty('email')
+
+            if (hasUsername && hasEmail) {
+                message = 'Username and email already exist.'
+            } else {
+                if (hasUsername) {
+                    message = 'Username already exists.'
+                }
+                if (hasEmail) {
+                    message = 'Email already exists.'
+                }
+            }
+
             dispatch({
                 type: REGISTER_USER_FAIL,
-                payload: 'Registration failed. Please, try again.'
+                payload: message
             })
 
             console.log(error)

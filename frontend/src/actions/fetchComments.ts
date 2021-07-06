@@ -25,7 +25,6 @@ export type TDispatchFetchComments =
     | IFetchCommentsFail
 
 // Action
-const URL = 'http://localhost:8000/api/comments/'
 export const FETCH_COMMENTS_LOADING = 'FETCH_COMMENTS_LOADING'
 export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS'
 export const FETCH_COMMENTS_FAIL = 'FETCH_COMMENTS_FAIL'
@@ -37,7 +36,7 @@ export default function fetchComments() {
                 type: FETCH_COMMENTS_LOADING
             })
 
-            const response = await axios.get(URL)
+            const response = await axios.get(process.env.COMMENTS_URL + '/')
 
             dispatch({
                 type: FETCH_COMMENTS_SUCCESS,

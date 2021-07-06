@@ -38,6 +38,7 @@ type TDispatchAuth =
 
 interface IAuthState {
     isAuthenticated: boolean
+    failed: boolean
     token: null | string
     user: null | IUser
     message: null | string
@@ -46,6 +47,7 @@ interface IAuthState {
 // Action
 const initialState = {
     isAuthenticated: false,
+    failed: false,
     token: null,
     user: null,
     message: null
@@ -59,7 +61,8 @@ export function authReducer(
     switch (action.type) {
         case REGISTER_USER_SUCCESS:
             return {
-                isAuthenticated: true,
+                isAuthenticated: false,
+                failed: false,
                 token: null,
                 user: null,
                 message: action.payload
@@ -67,6 +70,7 @@ export function authReducer(
         case REGISTER_USER_FAIL:
             return {
                 isAuthenticated: false,
+                failed: true,
                 token: null,
                 user: null,
                 message: action.payload
@@ -75,12 +79,14 @@ export function authReducer(
             return {
                 ...state,
                 isAuthenticated: false,
+                failed: false,
                 message: action.payload
             }
         case ACTIVATE_USER_FAIL:
             return {
                 ...state,
                 isAuthenticated: false,
+                failed: true,
                 message: action.payload
             }
         case LOGIN_USER_SUCCESS:
@@ -124,6 +130,7 @@ export function authReducer(
             }
         case LOGOUT_USER:
             return {
+                ...state,
                 isAuthenticated: false,
                 token: null,
                 user: null,

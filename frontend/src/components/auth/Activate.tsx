@@ -1,5 +1,5 @@
 // Import components, functions, types, and variables
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import activateUser from '../../actions/activateUser'
@@ -21,17 +21,21 @@ interface IActivateUserParams {
 // Component
 export function Activate({
     isAuthenticated,
-    message,
     activateUser
 }: IActivateUserProps) {
     const { userId, token } = useParams<IActivateUserParams>()
+    const history = useHistory()
 
     function handleActivateUser() {
         activateUser(userId, token)
     }
 
+    if (isAuthenticated) {
+        history.push('/')
+    }
+
     return (
-        <Container>
+        <Container className="py-2 py-md-4">
             <Button variant="success" onClick={handleActivateUser}>
                 Activate account
             </Button>
@@ -41,8 +45,7 @@ export function Activate({
 
 // Redux
 const mapStateToProps = (state: TRootState) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    message: state.auth.message
+    isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, { activateUser })(Activate)

@@ -16,7 +16,6 @@ interface IActivateUserFail {
 export type TDispatchActivateUser = IActivateUserSuccess | IActivateUserFail
 
 // Action
-const URL = 'http://localhost:8000/api/auth/'
 export const ACTIVATE_USER_SUCCESS = 'ACTIVATE_USER_SUCCESS'
 export const ACTIVATE_USER_FAIL = 'ACTIVATE_USER_FAIL'
 
@@ -34,7 +33,11 @@ export default function activateUser(userId: string, token: string) {
         }
 
         try {
-            await axios.post(URL + 'users/activation/', body, config)
+            await axios.post(
+                process.env.AUTH_URL + '/users/activation/',
+                body,
+                config
+            )
 
             dispatch({
                 type: ACTIVATE_USER_SUCCESS,

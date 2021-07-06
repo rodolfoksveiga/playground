@@ -21,7 +21,6 @@ interface IAuthLoadUserFail {
 export type TDispatchLoadUser = IAuthLoadUserSuccess | IAuthLoadUserFail
 
 // Action
-const URL = 'http://localhost:8000/api/auth/'
 export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS'
 export const LOAD_USER_FAIL = 'LOAD_USER_FAIL'
 
@@ -37,7 +36,10 @@ export default function loadUser(token: string | null) {
             }
 
             try {
-                const response = await axios.get(URL + 'users/me/', config)
+                const response = await axios.get(
+                    process.env.AUTH_URL + '/users/me/',
+                    config
+                )
 
                 dispatch({
                     type: LOAD_USER_SUCCESS,

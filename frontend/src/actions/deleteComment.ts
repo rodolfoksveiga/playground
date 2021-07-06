@@ -15,14 +15,13 @@ interface IDeleteCommentFail {
 export type TDispatchDeleteComment = IDeleteCommentSuccess | IDeleteCommentFail
 
 // Action
-const URL = 'http://localhost:8000/api/comments/'
 export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCESS'
 export const DELETE_COMMENT_FAIL = 'DELETE_COMMENT_FAIL'
 
 export default function deleteComment(id: string) {
     return async (dispatch: Dispatch<TDispatchDeleteComment>) => {
         try {
-            await axios.delete(URL + id + '/')
+            await axios.delete(process.env.COMMENTS_URL + '/' + id + '/')
 
             dispatch({
                 type: DELETE_COMMENT_SUCCESS
