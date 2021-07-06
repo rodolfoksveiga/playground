@@ -2,12 +2,17 @@ import { connect } from 'react-redux'
 import { Navbar, Nav } from 'react-bootstrap'
 import logoutUser from '../actions/logoutUser'
 import { useHistory } from 'react-router-dom'
+import { TRootState } from '../reducers/rootReducer'
 
 interface INavigationBarProps {
+    isAuthenticated: boolean
     logoutUser: Function
 }
 
-export function NavigationBar({ logoutUser }: INavigationBarProps) {
+export function NavigationBar({
+    isAuthenticated,
+    logoutUser
+}: INavigationBarProps) {
     const history = useHistory()
 
     function handleLogout() {
@@ -16,23 +21,43 @@ export function NavigationBar({ logoutUser }: INavigationBarProps) {
     }
 
     return (
-        <Navbar className="mb-2 mb-md-3 d-flex flex-column flex-md-row justify-content-between shadow">
-            <Navbar.Brand className="ml-2 font-size">
-                <b className="font-weight-bold">Rodolfo</b> Kirch Veiga
+        <Navbar
+            bg="dark"
+            variant="dark"
+            sticky="top"
+            expand="md"
+            collapseOnSelect
+        >
+            <Navbar.Brand className="ml-2">
+                <b>Rodolfo</b> Kirch Veiga
             </Navbar.Brand>
-            <Nav className="mr-2">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/resume/">Resume</Nav.Link>
-                <Nav.Link href="/projects/">Projects</Nav.Link>
-                <Nav.Link href="/blog/">Blog</Nav.Link>
-                <Nav.Link href="/contact/">Contact</Nav.Link>
-                <Nav.Link href="/user/">Profile</Nav.Link>
-                <Nav.Link href="/user/register/">Register</Nav.Link>
-                <Nav.Link href="/user/login/">Login</Nav.Link>
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-            </Nav>
+            <Navbar.Toggle className="mr-2" />
+            <Navbar.Collapse className="justify-content-end">
+                <Nav className="ml-2 ml-md-0 mr-md-2">
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/resume/">Resume</Nav.Link>
+                    <Nav.Link href="/projects/">Projects</Nav.Link>
+                    <Nav.Link href="/blog/">Blog</Nav.Link>
+                    <Nav.Link href="/contact/">Contact</Nav.Link>
+                    {isAuthenticated ? (
+                        <Nav>
+                            <Nav.Link href="/user/">Profile</Nav.Link>
+                            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                        </Nav>
+                    ) : (
+                        <Nav>
+                            <Nav.Link href="/user/login/">Login</Nav.Link>
+                            <Nav.Link href="/user/register/">Register</Nav.Link>
+                        </Nav>
+                    )}
+                </Nav>
+            </Navbar.Collapse>
         </Navbar>
     )
 }
 
-export default connect(null, { logoutUser })(NavigationBar)
+const mapStateToProps = (state: TRootState) => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { logoutUser })(NavigationBar)

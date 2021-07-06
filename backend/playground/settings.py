@@ -23,7 +23,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'djoser',
-    'users'
+    'users',
+    'posts',
+    'comments'
 ]
 
 MIDDLEWARE = [
@@ -66,16 +68,7 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
-    },
-    {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
     }
 ]
 
@@ -117,7 +110,7 @@ LOGIN_REDIRECT_URL = '/api/auth/users'
 AUTH_USER_MODEL = 'users.User'
 
 DOMAIN = ('localhost:3000')
-SITE_NAME = ('My Project')
+SITE_NAME = ('RV Personal Page')
 
 DJOSER = {
     'LOGIN_FIELD': 'username',
@@ -127,9 +120,9 @@ DJOSER = {
     'SEND_CONFIRMATION_EMAIL': True,
     'SET_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
-    'USERNAME_RESET_CONFIRM_URL': 'reset-username-confirm/{uid}/{token}',
-    'PASSWORD_RESET_CONFIRM_URL': 'reset-password-confirm/{uid}/{token}',
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'user/reset-username-confirm/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'user/reset-password-confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'user/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
         'user_create': 'auth.serializers.UserCreateSerializer',

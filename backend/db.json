@@ -1,23 +1,5 @@
 [
 {
-    "model": "users.user",
-    "fields": {
-        "password": "pbkdf2_sha256$260000$DOhyNqmQAMnnUyTOv8EfnP$4Y7avlcqSEdjS/sIEdVu6+Ew2eoI3zwFRILIQkWpc1I=",
-        "last_login": "2021-06-30T17:02:12.822Z",
-        "is_superuser": true,
-        "created_at": "2021-06-30T17:01:56.835Z",
-        "username": "rodox",
-        "email": "rodox@gmail.com",
-        "first_name": null,
-        "last_name": null,
-        "about": null,
-        "is_active": true,
-        "is_staff": true,
-        "groups": [],
-        "user_permissions": []
-    }
-},
-{
     "model": "posts.post",
     "pk": 1,
     "fields": {
