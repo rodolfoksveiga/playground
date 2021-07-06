@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import {
     FETCH_COMMENTS_LOADING,
     FETCH_COMMENTS_SUCCESS,
@@ -21,7 +21,7 @@ interface ICommentsState {
 
 type TDispatchComment = TDispatchFetchComments | TDispatchDeleteComment
 
-// Global variables
+// Variables
 const initialState = {
     isLoading: false,
     data: null,

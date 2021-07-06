@@ -1,15 +1,18 @@
+// Import components, functions, types, and variables
 import { useState } from 'react'
 import { Button, ButtonGroup, Card, Col, Container, Row } from 'react-bootstrap'
 import CommentForm from './CommentForm'
 import DeleteComment from './DeleteComment'
 import { IComment } from './PostDetails'
 
+// Types and interfaces
 interface ICommentCardProps {
     comment: IComment
     vertical: boolean
     handleTriggerReload: Function
 }
 
+// Component
 export default function CommentCard({
     comment,
     vertical,

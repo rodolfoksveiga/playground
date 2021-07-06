@@ -1,14 +1,8 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import axios from 'axios'
 import { Dispatch } from 'redux'
 
 import { TComments } from '../components/blog/PostDetails'
-
-// Action types
-const URL = 'http://localhost:8000/api/comments/'
-export const FETCH_COMMENTS_LOADING = 'FETCH_COMMENTS_LOADING'
-export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS'
-export const FETCH_COMMENTS_FAIL = 'FETCH_COMMENTS_FAIL'
 
 // Types and interfaces
 interface IFetchCommentsLoading {
@@ -31,6 +25,11 @@ export type TDispatchFetchComments =
     | IFetchCommentsFail
 
 // Action
+const URL = 'http://localhost:8000/api/comments/'
+export const FETCH_COMMENTS_LOADING = 'FETCH_COMMENTS_LOADING'
+export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS'
+export const FETCH_COMMENTS_FAIL = 'FETCH_COMMENTS_FAIL'
+
 export default function fetchComments() {
     return async (dispatch: Dispatch<TDispatchFetchComments>) => {
         try {

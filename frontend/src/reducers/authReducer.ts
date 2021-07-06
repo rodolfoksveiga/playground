@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import {
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
@@ -43,7 +43,7 @@ interface IAuthState {
     message: null | string
 }
 
-// Global variables
+// Action
 const initialState = {
     isAuthenticated: false,
     token: null,

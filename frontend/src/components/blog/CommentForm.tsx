@@ -1,3 +1,4 @@
+// Import components, functions, types, and variables
 import { connect } from 'react-redux'
 import { Formik } from 'formik'
 import {
@@ -13,6 +14,7 @@ import * as yup from 'yup'
 
 import createComment from '../../actions/createComment'
 
+// Types and interfaces
 export interface ICommentForm {
     body: string
     post: number
@@ -28,6 +30,7 @@ interface ICommentFormProps {
     handleTriggerReload: Function
 }
 
+// Variables
 const FormSchema = yup.object().shape({
     body: yup
         .string()
@@ -36,6 +39,7 @@ const FormSchema = yup.object().shape({
         .max(600, 'Comment must have less than 600 characters.')
 })
 
+// Component
 export function CommentForm({
     initialFormData,
     vertical,
@@ -151,4 +155,5 @@ export function CommentForm({
     )
 }
 
+// Redux
 export default connect(null, { createComment })(CommentForm)

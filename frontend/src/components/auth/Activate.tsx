@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -18,7 +18,7 @@ interface IActivateUserParams {
     token: string
 }
 
-// Main component
+// Component
 export function Activate({
     isAuthenticated,
     message,
@@ -39,7 +39,7 @@ export function Activate({
     )
 }
 
-// Connect to Redux
+// Redux
 const mapStateToProps = (state: TRootState) => ({
     isAuthenticated: state.auth.isAuthenticated,
     message: state.auth.message

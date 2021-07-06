@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import axios from 'axios'
 import { Dispatch } from 'redux'
 
@@ -15,12 +15,11 @@ interface IRegisterUserFail {
 
 export type TDispatchRegisterUser = IRegisterUserSuccess | IRegisterUserFail
 
-// Action types
+// Action
 const URL = 'http://localhost:8000/api/auth/'
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
 export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL'
 
-// Actions
 export default function registerUser(
     username: string,
     email: string,

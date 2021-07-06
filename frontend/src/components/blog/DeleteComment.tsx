@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
@@ -11,7 +11,7 @@ interface IDeleteCommentProps {
     handleTriggerReload: Function
 }
 
-// Main component
+// Component
 export function DeleteComment({
     id,
     deleteComment,
@@ -29,5 +29,5 @@ export function DeleteComment({
     )
 }
 
-// Connect to Redux
+// Redux
 export default connect(null, { deleteComment })(DeleteComment)

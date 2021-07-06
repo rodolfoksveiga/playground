@@ -1,5 +1,7 @@
+// Import components, functions, types, and variables
 import { Card, Button } from 'react-bootstrap'
 
+// Types and interfaces
 interface IPostCardProps {
     title: string
     image: string
@@ -8,6 +10,7 @@ interface IPostCardProps {
     id: number
 }
 
+// Component
 export default function PostCard({
     title,
     image,

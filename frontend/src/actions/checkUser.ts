@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import axios from 'axios'
 import { Dispatch } from 'redux'
 
@@ -13,12 +13,11 @@ interface ICheckUserFail {
 
 export type TDispatchCheckUser = ICheckUserSuccess | ICheckUserFail
 
-// Action types
+// Action
 const URL = 'http://localhost:8000/api/auth/'
 export const CHECK_USER_SUCCESS = 'CHECK_USER_SUCCESS'
 export const CHECK_USER_FAIL = 'CHECK_USER_FAIL'
 
-// Actions
 export default function checkUser(token: null | string) {
     return async (dispatch: Dispatch<TDispatchCheckUser>) => {
         if (token) {

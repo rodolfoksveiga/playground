@@ -1,3 +1,4 @@
+// Import components, functions, types, and variables
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
@@ -64,7 +65,7 @@ export function PostsList({
     )
 }
 
-// Connect to Redux
+// Redux
 const mapStateToProps = (state: TRootState) => ({
     posts: state.posts.data,
     message: state.posts.message

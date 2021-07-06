@@ -1,14 +1,8 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import axios from 'axios'
 import { Dispatch } from 'redux'
 
 import { TPosts } from '../components/blog/PostsList'
-
-// Action types
-const URL = 'http://localhost:8000/api/posts/'
-export const FETCH_POSTS_LOADING = 'FETCH_POSTS_LOADING'
-export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS'
-export const FETCH_POSTS_FAIL = 'FETCH_POSTS_FAIL'
 
 // Types and interfaces
 interface IFetchPostsLoading {
@@ -31,6 +25,11 @@ export type TDispatchFetchPosts =
     | IFetchPostsFail
 
 // Action
+const URL = 'http://localhost:8000/api/posts/'
+export const FETCH_POSTS_LOADING = 'FETCH_POSTS_LOADING'
+export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS'
+export const FETCH_POSTS_FAIL = 'FETCH_POSTS_FAIL'
+
 export default function fetchPosts() {
     return async (dispatch: Dispatch<TDispatchFetchPosts>) => {
         try {

@@ -1,3 +1,4 @@
+// Import components, functions, types, and variables
 import { Formik } from 'formik'
 import { connect } from 'react-redux'
 import { Button, Card, Form } from 'react-bootstrap'
@@ -6,10 +7,12 @@ import * as yup from 'yup'
 
 import registerUser from '../../actions/registerUser'
 
+// Types and interfaces
 interface IRegisterProps {
     registerUser: Function
 }
 
+// Variables
 const FormSchema = yup.object().shape({
     username: yup.string().required('Required field.'),
     email: yup.string().email('Invalid email.').required('Required field.'),
@@ -23,6 +26,7 @@ const FormSchema = yup.object().shape({
         .oneOf([yup.ref('password'), null], 'Passwords must match.')
 })
 
+// Component
 export function Register({ registerUser }: IRegisterProps) {
     return (
         <Formik
@@ -157,4 +161,5 @@ export function Register({ registerUser }: IRegisterProps) {
     )
 }
 
+// Redux
 export default connect(null, { registerUser })(Register)

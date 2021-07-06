@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import axios from 'axios'
 import { Dispatch } from 'redux'
 
@@ -15,12 +15,11 @@ interface IActivateUserFail {
 
 export type TDispatchActivateUser = IActivateUserSuccess | IActivateUserFail
 
-// Action types
+// Action
 const URL = 'http://localhost:8000/api/auth/'
 export const ACTIVATE_USER_SUCCESS = 'ACTIVATE_USER_SUCCESS'
 export const ACTIVATE_USER_FAIL = 'ACTIVATE_USER_FAIL'
 
-// Actions
 export default function activateUser(userId: string, token: string) {
     return async (dispatch: Dispatch<TDispatchActivateUser>) => {
         const body = JSON.stringify({

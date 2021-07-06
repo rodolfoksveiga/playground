@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
@@ -9,7 +9,7 @@ import { store, persistor } from './store'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-// Component
+// DOM
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>

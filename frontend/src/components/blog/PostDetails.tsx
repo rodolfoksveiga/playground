@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
@@ -135,7 +135,7 @@ export function PostDetails({
     )
 }
 
-// Connect to Redux
+// Redux
 const mapStateToProps = (state: TRootState) => ({
     posts: state.posts.data,
     comments: state.comments.data

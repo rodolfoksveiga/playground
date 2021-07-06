@@ -1,3 +1,4 @@
+// Import components, functions, types, and variables
 import { Formik } from 'formik'
 import { connect } from 'react-redux'
 import { Button, Card, Form } from 'react-bootstrap'
@@ -7,11 +8,13 @@ import * as yup from 'yup'
 import loginUser from '../../actions/loginUser'
 import { TRootState } from '../../reducers/rootReducer'
 
+// Types and interfaces
 interface ILoginProps {
     isAuthenticated: boolean
     loginUser: Function
 }
 
+// Variables
 const FormSchema = yup.object().shape({
     username: yup.string().required('Required field.'),
     password: yup
@@ -21,6 +24,7 @@ const FormSchema = yup.object().shape({
         .required('Required field.')
 })
 
+// Component
 export function Login({ loginUser }: ILoginProps) {
     return (
         <Formik
@@ -109,6 +113,7 @@ export function Login({ loginUser }: ILoginProps) {
     )
 }
 
+// Redux
 const mapStateToProps = (state: TRootState) => ({
     isAuthenticated: state.auth.isAuthenticated
 })

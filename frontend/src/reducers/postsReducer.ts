@@ -1,4 +1,4 @@
-// Import components, functions, types, variables, and styles
+// Import components, functions, types, and variables
 import {
     FETCH_POSTS_LOADING,
     FETCH_POSTS_SUCCESS,
@@ -14,7 +14,7 @@ interface IPostsState {
     message: null | string
 }
 
-// Global variables
+// Variables
 const initialState = {
     isLoading: false,
     data: null,

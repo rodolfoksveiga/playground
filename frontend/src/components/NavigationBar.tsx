@@ -1,14 +1,17 @@
+// Import components, functions, types, and variables
 import { connect } from 'react-redux'
 import { Navbar, Nav } from 'react-bootstrap'
 import logoutUser from '../actions/logoutUser'
 import { useHistory } from 'react-router-dom'
 import { TRootState } from '../reducers/rootReducer'
 
+// Types and interfaces
 interface INavigationBarProps {
     isAuthenticated: boolean
     logoutUser: Function
 }
 
+// Component
 export function NavigationBar({
     isAuthenticated,
     logoutUser
@@ -36,12 +39,9 @@ export function NavigationBar({
             <Navbar.Collapse className="justify-content-end">
                 <Nav className="ml-2 ml-md-0 mr-md-2">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/resume/">Resume</Nav.Link>
-                    <Nav.Link href="/projects/">Projects</Nav.Link>
-                    <Nav.Link href="/blog/">Blog</Nav.Link>
-                    <Nav.Link href="/contact/">Contact</Nav.Link>
                     {isAuthenticated ? (
                         <Nav>
+                            <Nav.Link href="/blog/">Blog</Nav.Link>
                             <Nav.Link href="/user/">Profile</Nav.Link>
                             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                         </Nav>
@@ -57,6 +57,7 @@ export function NavigationBar({
     )
 }
 
+// Redux
 const mapStateToProps = (state: TRootState) => ({
     isAuthenticated: state.auth.isAuthenticated
 })

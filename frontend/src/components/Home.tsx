@@ -1,5 +1,7 @@
+// Import components, functions, types, and variables
 import { Col, Container, Row } from 'react-bootstrap'
 
+// Component
 export default function Home() {
     return (
         <Container className="h-75">

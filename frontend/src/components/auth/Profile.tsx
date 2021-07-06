@@ -1,12 +1,15 @@
+// Import components, functions, types, and variables
 import { Card } from 'react-bootstrap'
 import { TRootState } from '../../reducers/rootReducer'
 import { connect } from 'react-redux'
 import { IUser } from '../../actions/loadUser'
 
+// Types and interfaces
 interface IProfileProps {
     user: null | IUser
 }
 
+// Component
 export function Profile({ user }: IProfileProps) {
     return (
         <Card>
@@ -21,7 +24,7 @@ export function Profile({ user }: IProfileProps) {
     )
 }
 
-// Connect to Redux
+// Redux
 const mapStateToProps = (state: TRootState) => ({
     user: state.auth.user
 })
