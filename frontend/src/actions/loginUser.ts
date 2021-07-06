@@ -18,6 +18,7 @@ interface ILoginUserFail {
 export type TDispatchLoginUser = ILoginUserSuccess | ILoginUserFail
 
 // Action
+const URL = 'http://localhost:8000/api/auth/'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL'
 
@@ -35,11 +36,7 @@ export default function loginUser(username: string, password: string) {
         })
 
         try {
-            const response = await axios.post(
-                process.env.AUTH_URL + '/jwt/create/',
-                body,
-                config
-            )
+            const response = await axios.post(URL + 'jwt/create/', body, config)
 
             dispatch({
                 type: LOGIN_USER_SUCCESS,

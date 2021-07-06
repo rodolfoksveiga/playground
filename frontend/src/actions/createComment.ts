@@ -19,16 +19,14 @@ interface ICreateCommentFail {
 export type TDispatchCreateComment = ICreateCommentSuccess | ICreateCommentFail
 
 // Action
+const URL = 'http://localhost:8000/api/comments/'
 export const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCESS'
 export const CREATE_COMMENT_FAIL = 'CREATE_COMMENT_FAIL'
 
 export default function createComment(form: ICommentForm) {
     return async (dispatch: Dispatch<TDispatchCreateComment>) => {
         try {
-            const response = await axios.post(
-                process.env.COMMENTS_URL + '/',
-                form
-            )
+            const response = await axios.post(URL, form)
 
             dispatch({
                 type: CREATE_COMMENT_SUCCESS,

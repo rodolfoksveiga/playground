@@ -14,6 +14,7 @@ interface ICheckUserFail {
 export type TDispatchCheckUser = ICheckUserSuccess | ICheckUserFail
 
 // Action
+const URL = 'http://localhost:8000/api/auth/'
 export const CHECK_USER_SUCCESS = 'CHECK_USER_SUCCESS'
 export const CHECK_USER_FAIL = 'CHECK_USER_FAIL'
 
@@ -33,7 +34,7 @@ export default function checkUser(token: null | string) {
 
             try {
                 const response = await axios.post(
-                    process.env.AUTH_URL + '/jwt/verify/',
+                    URL + 'jwt/verify/',
                     body,
                     config
                 )

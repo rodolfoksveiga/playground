@@ -25,6 +25,7 @@ export type TDispatchFetchPosts =
     | IFetchPostsFail
 
 // Action
+const URL = 'http://localhost:8000/api/posts/'
 export const FETCH_POSTS_LOADING = 'FETCH_POSTS_LOADING'
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS'
 export const FETCH_POSTS_FAIL = 'FETCH_POSTS_FAIL'
@@ -36,7 +37,7 @@ export default function fetchPosts() {
                 type: FETCH_POSTS_LOADING
             })
 
-            const response = await axios.get(process.env.POSTS_URL + '/')
+            const response = await axios.get(URL)
 
             dispatch({
                 type: FETCH_POSTS_SUCCESS,
